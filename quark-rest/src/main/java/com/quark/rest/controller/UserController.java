@@ -102,7 +102,7 @@ public class UserController extends BaseController {
     @GetMapping("/message/{token}")
     public QuarkResult getUserAndMessageByToken(@PathVariable String token){
         QuarkResult result = restProcessor(() -> {
-            HashMap<String, Object> map = new HashMap<>();
+            HashMap<String, Object> map = new HashMap();
             User user = userService.getUserByToken(token);
             if (user == null) return QuarkResult.warn("session过期,请重新登录");
             long count = notificationService.getNotificationCount(user.getId());
@@ -173,7 +173,7 @@ public class UserController extends BaseController {
             User user = userService.findOne(userid);
             if (user == null || userid == null) return QuarkResult.warn("用户不存在");
             List<Posts> postss = postsService.getPostsByUser(user);
-            HashMap<String, Object> map = new HashMap<>();
+            HashMap<String, Object> map = new HashMap();
             map.put("posts",postss);
             map.put("user",user);
             return QuarkResult.ok(map);

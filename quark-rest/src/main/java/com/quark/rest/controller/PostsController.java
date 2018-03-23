@@ -105,7 +105,7 @@ public class PostsController extends BaseController {
             @RequestParam(required = false, defaultValue = "1") int pageNo,
             @RequestParam(required = false, defaultValue = "20") int length) {
         QuarkResult result = restProcessor(() -> {
-            HashMap<String, Object> map = new HashMap<>();
+            HashMap<String, Object> map = new HashMap();
             Posts posts = postsService.findOne(postsid);
             if (posts == null) return QuarkResult.error("帖子不存在");
             map.put("posts", posts);

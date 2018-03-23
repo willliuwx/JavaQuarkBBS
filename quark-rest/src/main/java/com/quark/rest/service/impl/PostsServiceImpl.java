@@ -63,7 +63,7 @@ public class PostsServiceImpl extends BaseServiceImpl<PostsDao, Posts> implement
 
     @Override
     public Page<Posts> getPostsByPage(String type, String search, int pageNo, int length) {
-        List<Sort.Order> orders = new ArrayList<>();
+        List<Sort.Order> orders = new ArrayList();
         orders.add(new Sort.Order(Sort.Direction.DESC, "top"));
         orders.add(new Sort.Order(Sort.Direction.DESC, "id"));
 
@@ -77,7 +77,7 @@ public class PostsServiceImpl extends BaseServiceImpl<PostsDao, Posts> implement
                 Path<Boolean> $top = root.get("top");
                 Path<Boolean> $good = root.get("good");
                 Path<String> $title = root.get("title");
-                ArrayList<Predicate> list = new ArrayList<>();
+                ArrayList<Predicate> list = new ArrayList();
                 if (type != null && type.equals("good")) list.add(criteriaBuilder.equal($good, true));
                 if (type != null && type.equals("top")) list.add(criteriaBuilder.equal($top, true));
                 if (search != null && search != "") list.add(criteriaBuilder.like($title, "%" + search + "%"));
@@ -101,7 +101,7 @@ public class PostsServiceImpl extends BaseServiceImpl<PostsDao, Posts> implement
 
     @Override
     public Page<Posts> getPostsByLabel(Label label, int pageNo, int lenght) {
-        List<Sort.Order> orders = new ArrayList<>();
+        List<Sort.Order> orders = new ArrayList();
         orders.add(new Sort.Order(Sort.Direction.DESC, "top"));
         orders.add(new Sort.Order(Sort.Direction.DESC, "id"));
         Sort sort = new Sort(orders);
